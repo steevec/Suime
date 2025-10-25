@@ -1,0 +1,334 @@
+/* style.css — Sui-me */
+@font-face{
+  font-family:"Playlist Script";
+  src:url("/css/Playlist_Script.otf") format("opentype");
+  font-display:swap;
+}
+:root{
+  --fond:#FDEDE3;
+  --bloc:#FF9E9B;
+  --texte:#580010;
+  --rose:#E94772;
+  --white:#fff;
+  --shadow:0 8px 30px rgba(0,0,0,.08);
+  --radius-xl:32px;
+  --radius-lg:20px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--fond);color:var(--texte)}
+body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.55}
+
+/* Header */
+.header{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter:saturate(180%) blur(6px);
+  background: color-mix(in oklab, var(--fond) 85%, white);
+  border-bottom:1px solid color-mix(in oklab, var(--texte) 10%, transparent);
+}
+.header-inner{
+  max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;
+  padding:14px 18px;
+}
+/* Bloc logo : 2 colonnes (icone + texte sur 2 lignes), garde le header compact */
+.logo{
+  display:grid;
+  grid-template-columns:auto 1fr;   /* [logo] [texte] */
+  align-items:center;               /* centre verticalement le texte par rapport au logo */
+  column-gap:10px;
+  text-decoration:none;             /* pas de soulignement */
+}
+
+.logo-svg{
+  width:100px;                      /* ↓ si tu veux un header encore plus fin : 90–100px */
+  height:auto;
+  display:block;
+}
+
+/* Texte sur 2 lignes, à côté du logo, sans agrandir exagérément le header */
+.logo-legend{
+  display:flex;
+  flex-direction:column;            /* force 2 lignes */
+  margin:0;
+  line-height:1.08;
+  text-decoration:none;
+  background:none;                  /* aucune surbrillance/surlignage */
+  /* Couleur “comme avant” (plus doux) : */
+color: var(--rose);
+  opacity:.9;
+
+  /* Taille: plus gros qu’avant mais < H1 */
+  font-family: 'Nunito',sans-serif !important;
+  font-weight:900;
+  font-size: clamp(20px, 1.8vw, 26px);
+
+}
+
+/* Mobile : compacter un peu */
+@media (max-width:780px){
+  .logo-svg{ width:92px }
+  .logo-legend{
+    font-size: clamp(14px, 4vw, 18px);
+    line-height:1.06;
+  }
+}
+
+
+.nav{margin-left:auto;display:flex;gap:22px;align-items:center}
+.nav a{color:var(--texte);text-decoration:none;font-weight:700}
+.burger{
+  display:none;
+  border:0;
+  background:transparent;
+  width:42px;
+  height:42px;
+  cursor:pointer;
+  padding:0;
+  outline:none;
+}
+
+/* Supprime le cadre bleu/contour par défaut au focus */
+.burger:focus,
+.burger:focus-visible,
+.burger:active{
+  outline:none;
+  box-shadow:none;
+}
+
+/* Optionnel : petit effet visuel au hover pour indiquer que c’est cliquable */
+.burger:hover svg path{
+  stroke: color-mix(in oklab, var(--texte) 70%, #000);
+}
+
+/* Containers */
+.section{padding:28px 18px}
+.section.visible{animation:fade .2s ease}
+@keyframes fade{from{opacity:.7}to{opacity:1}}
+.container,.page-narrow,.hero-card,.features{max-width:1100px;margin:0 auto}
+
+/* Hero */
+.hero-card{
+  background: linear-gradient(145deg, color-mix(in oklab, var(--bloc) 15%, white), var(--fond));
+  border-radius: var(--radius-xl);
+  padding: clamp(24px, 6vw, 56px);
+  display:grid; grid-template-columns: 1.1fr .9fr; gap:28px; align-items:start;
+  box-shadow:var(--shadow);
+}
+.kicker{font-weight:800; font-family:'Nunito',sans-serif; letter-spacing:.02em; opacity:.8}
+.h1{font-family:'Nunito',sans-serif;color:var(--texte);font-weight:900;
+    font-size: clamp(28px, 4.6vw, 56px); line-height:1.05; margin:.25rem 0 1rem}
+.brand{font-family:"Playlist Script", cursive; color:var(--rose); font-weight:400}
+.p.intro{max-width:60ch;margin:0 0 18px}
+.store-row{display:flex;gap:12px;flex-wrap:wrap}
+.store-btn{display:inline-flex;align-items:center;gap:10px;border-radius:12px;padding:10px 14px;background:#fff;box-shadow:var(--shadow);text-decoration:none;color:#111;font-weight:700}
+.store-btn small{display:block;font-weight:500;opacity:.7;line-height:1}
+.store-btn span{display:block;font-size:15px}
+
+.hero-right{display:flex;justify-content:flex-end}
+.phone{width:min(340px, 100%); aspect-ratio: 9/18; border-radius:32px; background:#fff; box-shadow:var(--shadow); position:relative; overflow:hidden}
+.phone::before{
+  content:""; position:absolute; inset:0;
+  background:
+   radial-gradient(120px 120px at 20% 20%, rgba(255,158,155,.25), transparent 60%),
+   radial-gradient(140px 140px at 80% 30%, rgba(233,71,114,.18), transparent 60%),
+   linear-gradient(180deg, #fff, #fafafa 60%, #fff);
+}
+.phone__notch{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:45%;height:20px;background:#eee;border-radius:0 0 18px 18px}
+.phone__screen{position:absolute; inset:34px 14px 18px; border-radius:22px; background:#F7F7F7; display:grid; place-items:center; color:#999; text-align:center; font-size:14px}
+
+/* Features */
+.features h2{
+  font-family:'Nunito',sans-serif; font-weight:900; margin:28px auto 18px;
+  font-size: clamp(22px, 3vw, 36px); color:var(--texte)
+}
+.cards{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; align-items:start}
+.card{background:#fff; border-radius: var(--radius-lg); box-shadow:var(--shadow); padding:0; display:grid; grid-template-rows:auto 1fr}
+.card__mock{width:100%; height:200px; object-fit:cover; border-radius: var(--radius-lg) var(--radius-lg) 0 0}
+.card__body{padding:18px}
+.card h3{font-family:'Nunito',sans-serif; font-size:20px; margin:0 0 8px; color:var(--texte)}
+.card p{margin:0}
+
+/* Contact */
+.page-narrow{max-width:760px}
+.contact-form{display:grid;gap:14px;margin-top:10px}
+.field{display:grid;gap:6px}
+.field label{font-weight:600}
+.field input,.field textarea{border:1px solid color-mix(in oklab, var(--texte) 18%, transparent); border-radius:12px; padding:10px 12px; background:#fff}
+.btn-cta{background:var(--bloc);color:var(--texte);font-weight:700;border:none;border-radius:999px;padding:10px 16px;box-shadow:var(--shadow);cursor:pointer}
+.status{min-height:24px;margin-top:6px}
+.honeypot{display:none !important}
+
+/* Footer */
+.footer{padding:24px 18px}
+.legal.small{opacity:.75; font-size:.92rem}
+
+/* Responsive */
+@media (max-width:960px){
+  .hero-card{grid-template-columns:1fr}
+  .hero-right{justify-content:center}
+  .cards{grid-template-columns:1fr}
+}
+@media (max-width:780px){
+  .burger{
+    display:block;
+    width:42px;
+    height:42px;
+    border:0;
+    background:transparent;
+    cursor:pointer;
+    padding:0;
+    z-index:100;                /* le garde au-dessus du menu */
+    position:relative;
+  }
+
+  .nav{
+    display:none;
+    position:absolute;
+    right:18px;
+    top:60px;
+    background:#ffffff;
+    padding:14px;
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    flex-direction:column;
+    z-index:90;
+  }
+
+  .nav.open{
+    display:flex;
+  }
+
+  .nav a{
+    padding:8px 2px;
+  }
+}
+
+/* Même hauteur des 3 cartes uniquement en version PC */
+@media (min-width: 961px){
+  .cards{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 18px;
+    grid-auto-rows: 1fr;     /* chaque ligne a la même hauteur */
+    align-items: stretch;
+  }
+  .card{
+    display: flex;
+    flex-direction: column;  /* visuel en haut, texte en bas */
+    height: 100%;
+  }
+  .card__body{
+    flex: 1;                 /* remplit l’espace restant */
+    display: flex;
+    flex-direction: column;
+  }
+  /* Option : garder une tête identique pour toutes */
+  .card__mock{
+    height: 200px;           /* ou: aspect-ratio:16/9; height:auto; */
+    object-fit: cover;
+  }
+}
+
+/* --- Diaporama téléphone --- */
+.phone__screen{
+  position:absolute;
+  inset:34px 14px 18px;
+  border-radius:22px;
+  background:#580010;
+  overflow:hidden;
+  display:block;
+}
+
+.phone-slider{
+  width:100%;
+  height:100%;
+  position:relative;
+}
+
+.phone-slider img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity 1s ease-in-out;
+}
+
+.phone-slider img.active{
+  opacity:1;
+  z-index:1;
+}
+/* --- Mobile : menu sous le logo, bien espacé et jamais par-dessus --- */
+@media (max-width: 780px){
+  #burger{ display:none !important; }
+
+  .header-inner{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    row-gap:0;                 /* on gère l'espace avec les marges des blocs */
+    position:relative;
+    z-index:0;
+  }
+
+  /* Bloc logo compact et au-dessus de la nav */
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    position:relative;
+    z-index:2;                 /* reste au-dessus si chevauchement */
+    margin-bottom: 10px;       /* espace sous le logo */
+  }
+  .logo-svg{ width:88px; height:auto; }
+  .logo-legend{ line-height:1.08; }
+
+  /* Nav horizontale, centrée, avec espace et sans chevauchement */
+  .nav{
+    display:flex !important;
+    flex-direction:row !important;
+    justify-content:center;
+    align-items:center;
+    gap: 28px;                 /* <-- espace entre les 3 liens */
+    position:static;           /* pas d'absolu = pas de recouvrement */
+    margin-top: 6px;           /* espace supplémentaire si besoin */
+    padding: 6px 10px;
+    z-index:1;
+  }
+  .nav a{
+    display:inline-block;
+    color: color-mix(in oklab, var(--texte) 70%, white);
+    font-weight: 700;
+    text-decoration:none;
+    font-size: clamp(13px, 3.6vw, 16px);
+    line-height: 1.2;
+    padding: 4px 2px;
+  }
+  .nav a:hover{ color: var(--texte); }
+
+  /* Corrige l’alignement : centre la nav et annule le push à droite */
+  .nav{
+    margin-left: 0 !important;   /* ← annule la règle desktop */
+    justify-content: center;     /* déjà présent, on renforce */
+  }
+}
+
+
+/* === Palette : beige très pâle (plus clair que --fond) === */
+:root{
+  /* beige ultra léger issu du fond, éclairci */
+  --beige: color-mix(in oklab, var(--fond) 70%, white);
+}
+
+/* === Plus d'air dans les blocs texte === */
+.card__body{
+  /* + padding autour du contenu des cartes */
+  padding: 24px 24px 22px;
+}
+
+/* Formulaire : champs plus respirants */
+.field input,
+.field textarea{
+  padding: 12px 14px;                     /* + padding interne */
+}
+

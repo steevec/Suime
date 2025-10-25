@@ -1,0 +1,35 @@
+# IDE & OS-specific
+.vscode/
+.idea/
+.DS_Store
+.DS_Store?
+._*
+**/.DS_Store
+**/.php-cs-fixer.php
+.history/
+.history
+# Git & GitHub
+.git/
+.github/
+
+# Configs locales
+includ/config_variables.php
+.editorconfig
+settings.json
+sftp.json
+task.json
+
+# Dépendances & outils
+node_modules/
+vendor/
+phpcs.xml
+.htaccess
+
+# Temp & cache
+cachegrind/
+tmp/
+**/tmp
+var/
+z/
+# PHPStan & Composer
+phpstan.neon
